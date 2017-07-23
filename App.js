@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderRadius: 50,
     marginTop: 400,
+    overflow: 'hidden',
   },
   buttonText: {
     color: '#ffffff',
