@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#00a9faff',
     height: 40,
     width: 180,
-    borderWidth: 0,
+    borderWidth: 1,
+    borderColor: '#00a9faff',
     borderRadius: 50,
     marginTop: 400,
-    overflow: 'hidden',
   },
   buttonText: {
     color: '#ffffff',
