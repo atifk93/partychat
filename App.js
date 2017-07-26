@@ -5,7 +5,7 @@ import {
   View,
   Image
 } from 'react-native';
-import Button from 'apsl-react-native-button';
+import Button from 'react-native-button';
 import { Font } from 'expo';
 
 export default class App extends React.Component {
@@ -27,8 +27,8 @@ export default class App extends React.Component {
         {
           this.state.fontLoaded ? (
             <Button
-          style={styles.buttonStyle}
-          textStyle={styles.buttonText}
+              containerStyle={styles.buttonStyle}
+              style={styles.buttonText}
             >
         login with facebook
         </Button>
@@ -43,20 +43,20 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
     backgroundColor: 'rgb(0,0,0)',
     resizeMode: 'contain',
     width: null,
     height: null,
-    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonStyle: {
     backgroundColor: '#00a9faff',
     height: 40,
     width: 180,
-    borderWidth: 0,
     borderRadius: 50,
-    marginTop: 400,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    marginTop: '125%',
   },
   buttonText: {
     color: '#ffffff',
