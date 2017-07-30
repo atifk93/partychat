@@ -16,7 +16,7 @@ export default class Pages extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({                          //wait for font to load
-      'arial-rounded-mt': require('./assets/fonts/arial-rounded-mt.ttf'),
+      'arial-rounded-mt': require('../assets/fonts/arial-rounded-mt.ttf'),
     });
 
     this.setState({ fontLoaded: true });
@@ -29,7 +29,7 @@ render() {
 
   <View style={styles.slide1}>
 
-    <Image source={require('./assets/pages/background1.png')} style={styles.backgroundStyle}>
+    <Image source={require('../assets/pages/background1.png')} style={styles.backgroundStyle}>
 
     {
       this.state.fontLoaded ? (                          //if font loaded, render header
@@ -45,7 +45,7 @@ render() {
 
   <View style={styles.slide2}>
 
-    <Image source={require('./assets/pages/background2.png')} style={styles.backgroundStyle}>
+    <Image source={require('../assets/pages/background2.png')} style={styles.backgroundStyle}>
 
     {
       this.state.fontLoaded ? (                     //if font loaded, render header
@@ -61,7 +61,7 @@ render() {
 
   <View style={styles.slide3}>
 
-    <Image source={require('./assets/pages/background.png')} style={styles.backgroundStyle}>
+    <Image source={require('../assets/pages/background.png')} style={styles.backgroundStyle}>
 
     {
       this.state.fontLoaded ? (                      //if font loaded, render header

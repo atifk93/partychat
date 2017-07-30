@@ -18,24 +18,7 @@ export default class Login extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({                                        //wait for font to load
-      'arial-rounded': require('./assets/fonts/arial-rounded.ttf'),
-    });
-                                                                   //initialize firebase
-    firebase.initializeApp({
-        apiKey: 'AIzaSyBC561BzZ0J_gMP89bDiJxUtXOXp-24ESc',
-        authDomain: 'partychat-67c9d.firebaseapp.com',
-        databaseURL: 'https://partychat-67c9d.firebaseio.com',
-        projectId: 'partychat-67c9d',
-        storageBucket: 'partychat-67c9d.appspot.com',
-        messagingSenderId: '608346416500',
-        });
-                                               // Listen for authentication state to change.
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) {
-        console.log('We are authenticated now!');
-      }
-
-        // Do other things
+      'arial-rounded': require('../assets/fonts/arial-rounded.ttf'),
     });
 
     this.setState({ fontLoaded: true });
@@ -67,7 +50,7 @@ export default class Login extends React.Component {
   render() {
     return (                                  //render login screen
       <View style={styles.container}>
-      <Image source={require('./assets/login/background.png')} style={styles.backgroundStyle}>
+      <Image source={require('../assets/login/background.png')} style={styles.backgroundStyle}>
         {
           this.state.fontLoaded ? (                    //if font loaded, render button
             <Button
