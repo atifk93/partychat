@@ -1,122 +1,92 @@
 import React from 'react';
+import Expo, { Font } from 'expo';
 import {
   StyleSheet,
-  Image,
+  Alert,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Font } from 'expo';
+import Button from 'react-native-button';
 
-export default class Pages extends React.Component {
+export default class Login extends React.Component {
 
   state = {
       fontLoaded: false,
     };
 
   async componentDidMount() {
-    await Font.loadAsync({                          //wait for font to load
-      'arial-rounded-mt': require('./assets/fonts/arial-rounded-mt.ttf'),
+    await Font.loadAsync({                            //wait for font to load
+      'arial-rounded': require('./assets/fonts/arial-rounded.ttf'),
     });
 
     this.setState({ fontLoaded: true });
   }
 
-render() {
-  return (                                        //render swiper
+async logIn() {                                   //facebook authentication
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
+        permissions: ['public_profile', 'user_friends'],
+      });
+    if (type === 'success') {
+      // Get the user's name using Facebook's Graph API
+      const response = await fetch(
+        `https://graph.facebook.com/me?access_token=${token}`);
+      Alert.alert(
+        'Logged in!',
+        `Hi ${(await response.json()).name}!`,
+      );
+    }
+  }
 
-<Swiper style={styles.wrapper} showsButtons={false}>
-
-  <View style={styles.slide1}>
-
-    <Image source={require('./assets/pages/background.png')} style={styles.backgroundStyle}>
-
-    {
-      this.state.fontLoaded ? (                          //if font loaded, render header
-        <Text style={styles.headerStyle}>parties</Text>
+  render() {
+    return (                                  //render login screen
+      <View style={styles.container}>
+      <Image source={require('./assets/login/background.png')} style={styles.backgroundStyle}>
+        {
+          this.state.fontLoaded ? (                    //if font loaded, render button
+            <Button
+              containerStyle={styles.buttonStyle}
+              style={styles.buttonText}
+              onPress={() => this.logIn()}               //on button press, facebook authentication
+            >
+        login with facebook
+        </Button>
       ) : null
     }
-
-      <View style={styles.partyList} />
-
-    </Image>
-
-  </View>
-
-  <View style={styles.slide2}>
-
-    <Image source={require('./assets/pages/background.png')} style={styles.backgroundStyle}>
-
-    {
-      this.state.fontLoaded ? (                     //if font loaded, render header
-        <Text style={styles.headerStyle}>messages</Text>
-      ) : null
-    }
-
-      <View style={styles.partyList} />
-
-    </Image>
-
-  </View>
-
-  <View style={styles.slide3}>
-
-    <Image source={require('./assets/pages/background.png')} style={styles.backgroundStyle}>
-
-    {
-      this.state.fontLoaded ? (                      //if font loaded, render header
-        <Text style={styles.headerStyle}>create party</Text>
-      ) : null
-    }
-
-    </Image>
-
-  </View>
-
-</Swiper>
-);
-}
+      </Image>
+      </View>
+    );
+  }
 }
 
 
 const styles = StyleSheet.create({
-  wrapper: {
-  },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000000'
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000000'
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000000'
-  },
   backgroundStyle: {
     flex: 1,
     width: '100%',
     height: '100%',
     alignItems: 'center',
   },
-  headerStyle: {
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000000'
+  },
+  buttonStyle: {
+    backgroundColor: '#00a9faff',
+    height: 40,
+    width: 180,
+    borderRadius: 50,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '125%',
+  },
+  buttonText: {
     color: '#ffffff',
-    backgroundColor: 'rgba(0,0,0,0)',
-    fontSize: 35,
-    fontFamily: 'arial-rounded-mt',
+    fontFamily: 'arial-rounded',
     fontWeight: 'normal',
-    padding: 20,
-  },
-  partyList: {
-    backgroundColor: '#ffffff',
-    height: '85%',
-    width: '97.5%',
-  },
+    fontSize: 17,
+  }
 });

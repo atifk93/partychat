@@ -1,12 +1,13 @@
 import React from 'react';
+import Expo, { Font } from 'expo';
 import {
   StyleSheet,
+  Alert,
   Text,
   View,
   Image
 } from 'react-native';
 import Button from 'react-native-button';
-import { Font } from 'expo';
 
 export default class Login extends React.Component {
 
@@ -22,6 +23,21 @@ export default class Login extends React.Component {
     this.setState({ fontLoaded: true });
   }
 
+async logIn() {                                   //facebook authentication
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
+        permissions: ['public_profile', 'user_friends'],
+      });
+    if (type === 'success') {
+      // Get the user's name using Facebook's Graph API
+      const response = await fetch(
+        `https://graph.facebook.com/me?access_token=${token}`);
+      Alert.alert(
+        'Logged in!',
+        `Hi ${(await response.json()).name}!`,
+      );
+    }
+  }
+
   render() {
     return (                                  //render login screen
       <View style={styles.container}>
@@ -31,6 +47,7 @@ export default class Login extends React.Component {
             <Button
               containerStyle={styles.buttonStyle}
               style={styles.buttonText}
+              onPress={() => this.logIn()}               //on button press, facebook authentication
             >
         login with facebook
         </Button>
