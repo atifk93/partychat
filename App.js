@@ -23,7 +23,7 @@ export default class Login extends React.Component {
     this.setState({ fontLoaded: true });
   }
 
-async logIn() {                                   //facebook authentication
+async logIn() {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
         permissions: ['public_profile', 'user_friends'],
       });
@@ -47,7 +47,7 @@ async logIn() {                                   //facebook authentication
             <Button
               containerStyle={styles.buttonStyle}
               style={styles.buttonText}
-              onPress={() => this.logIn()}               //on button press, facebook authentication
+              onPress={() => this.logIn()}
             >
         login with facebook
         </Button>
