@@ -9,7 +9,7 @@ export default class App extends React.Component {
       userAuthenticated: false
     };
 
-componentDidMount() {
+componentWillMount() {
                                                                    //initialize firebase
     firebase.initializeApp({
         apiKey: 'AIzaSyBC561BzZ0J_gMP89bDiJxUtXOXp-24ESc',
