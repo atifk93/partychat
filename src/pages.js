@@ -29,7 +29,7 @@ render() {
 
   <View style={styles.slide1}>
 
-    <Image source={require('./assets/pages/background.png')} style={styles.backgroundStyle}>
+    <Image source={require('./assets/pages/background1.png')} style={styles.backgroundStyle}>
 
     {
       this.state.fontLoaded ? (                          //if font loaded, render header
@@ -45,7 +45,7 @@ render() {
 
   <View style={styles.slide2}>
 
-    <Image source={require('./assets/pages/background.png')} style={styles.backgroundStyle}>
+    <Image source={require('./assets/pages/background2.png')} style={styles.backgroundStyle}>
 
     {
       this.state.fontLoaded ? (                     //if font loaded, render header
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   partyList: {
     backgroundColor: '#ffffff',
-    height: '85%',
-    width: '97.5%',
+    height: 483,
+    width: 313,
   },
 });
