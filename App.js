@@ -31,8 +31,10 @@ componentWillMount() {
 
 
   render() {
-    return (                                  //render login screen
-        this.state.userAuthenticated ? (                    //if user authenticated, render Pages
+                                                     //render login screen
+    return (
+                                                    //if user authenticated, render Pages
+        this.state.userAuthenticated ? (
           <Pages />
         ) : (
           <Login />

@@ -15,7 +15,8 @@ export default class Pages extends React.Component {
     };
 
   async componentDidMount() {
-    await Font.loadAsync({                          //wait for font to load
+                                                       //wait for font to load
+    await Font.loadAsync({
       'arial-rounded-mt': require('../assets/fonts/arial-rounded-mt.ttf'),
     });
 
@@ -23,7 +24,8 @@ export default class Pages extends React.Component {
   }
 
 render() {
-  return (                                        //render swiper
+                                                        //render swiper
+  return (
 
 <Swiper style={styles.wrapper} showsButtons={false}>
 
@@ -32,7 +34,8 @@ render() {
     <Image source={require('../assets/pages/background1.png')} style={styles.backgroundStyle}>
 
     {
-      this.state.fontLoaded ? (                          //if font loaded, render header
+                                                        //if font loaded, render header
+      this.state.fontLoaded ? (
         <Text style={styles.headerStyle}>parties</Text>
       ) : null
     }
@@ -48,7 +51,8 @@ render() {
     <Image source={require('../assets/pages/background2.png')} style={styles.backgroundStyle}>
 
     {
-      this.state.fontLoaded ? (                     //if font loaded, render header
+                                                       //if font loaded, render header
+      this.state.fontLoaded ? (
         <Text style={styles.headerStyle}>messages</Text>
       ) : null
     }
@@ -64,7 +68,8 @@ render() {
     <Image source={require('../assets/pages/background.png')} style={styles.backgroundStyle}>
 
     {
-      this.state.fontLoaded ? (                      //if font loaded, render header
+                                                        //if font loaded, render header
+      this.state.fontLoaded ? (
         <Text style={styles.headerStyle}>create party</Text>
       ) : null
     }

@@ -17,7 +17,8 @@ export default class Login extends React.Component {
     };
 
   async componentDidMount() {
-    await Font.loadAsync({                                        //wait for font to load
+                                                           //wait for font to load
+    await Font.loadAsync({
       'arial-rounded': require('../assets/fonts/arial-rounded.ttf'),
     });
 
@@ -25,7 +26,8 @@ export default class Login extends React.Component {
   }
 
 
-  async loginWithFacebook() {                              //facebook & firebase authentication
+                                                         //facebook & firebase authentication
+  async loginWithFacebook() {
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
           permissions: ['public_profile', 'user_friends'],
         });
@@ -48,15 +50,18 @@ export default class Login extends React.Component {
 
 
   render() {
-    return (                                  //render login screen
+                                                       //render login screen
+    return (
       <View style={styles.container}>
       <Image source={require('../assets/login/background.png')} style={styles.backgroundStyle}>
         {
-          this.state.fontLoaded ? (                    //if font loaded, render button
+                                                       //if font loaded, render button
+          this.state.fontLoaded ? (
             <Button
               containerStyle={styles.buttonStyle}
               style={styles.buttonText}
-              onPress={() => this.loginWithFacebook()}    //facebook auth on button press
+                                                     //facebook auth on button press
+              onPress={() => this.loginWithFacebook()}
             >
         login with facebook
         </Button>
