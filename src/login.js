@@ -8,6 +8,7 @@ import {
   Image
 } from 'react-native';
 import Button from 'react-native-button';
+import firebase from 'firebase';
 
 export default class Login extends React.Component {
 
@@ -16,27 +17,52 @@ export default class Login extends React.Component {
     };
 
   async componentDidMount() {
-    await Font.loadAsync({                            //wait for font to load
+    await Font.loadAsync({                                        //wait for font to load
       'arial-rounded': require('./assets/fonts/arial-rounded.ttf'),
+    });
+                                                                   //initialize firebase
+    firebase.initializeApp({
+        apiKey: 'AIzaSyBC561BzZ0J_gMP89bDiJxUtXOXp-24ESc',
+        authDomain: 'partychat-67c9d.firebaseapp.com',
+        databaseURL: 'https://partychat-67c9d.firebaseio.com',
+        projectId: 'partychat-67c9d',
+        storageBucket: 'partychat-67c9d.appspot.com',
+        messagingSenderId: '608346416500',
+        });
+                                               // Listen for authentication state to change.
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        console.log('We are authenticated now!');
+      }
+
+        // Do other things
     });
 
     this.setState({ fontLoaded: true });
   }
 
-async logIn() {                              //facebook authentication
-    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
-        permissions: ['public_profile', 'user_friends'],
+
+  async loginWithFacebook() {                              //facebook & firebase authentication
+      const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
+          permissions: ['public_profile', 'user_friends'],
+        });
+      if (type === 'success') {
+                                            // Get the user's name using Facebook's Graph API
+        const response = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}`);
+                                        // Build Firebase credential with the Facebook access token.
+        const credential = firebase.auth.FacebookAuthProvider.credential(token);
+                                           // Sign in with credential from the Facebook user.
+        firebase.auth().signInWithCredential(credential).catch((error) => {
+                                                         // Handle Errors here.
       });
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(
-        `https://graph.facebook.com/me?access_token=${token}`);
-      Alert.alert(
-        'Logged in!',
-        `Hi ${(await response.json()).name}!`,
-      );
+        Alert.alert(
+          'Logged in!',
+          `Hi ${(await response.json()).name}!`,
+        );
+      }
     }
-  }
+
 
   render() {
     return (                                  //render login screen
@@ -47,7 +73,7 @@ async logIn() {                              //facebook authentication
             <Button
               containerStyle={styles.buttonStyle}
               style={styles.buttonText}
-              onPress={() => this.logIn()}      //when button is pressed => facebook authentication
+              onPress={() => this.loginWithFacebook()}    //facebook auth on button press
             >
         login with facebook
         </Button>
