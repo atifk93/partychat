@@ -30,7 +30,7 @@ componentWillMount() {
 
 
   render() {
-                                                     //render login screen
+                                                     //either render Login or Pages
     return (
                                                     //if user authenticated, render Pages
         this.state.userAuthenticated ? (
