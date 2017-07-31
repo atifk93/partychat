@@ -26,58 +26,39 @@ export default class Pages extends React.Component {
 render() {
                                                         //render swiper
   return (
-
 <Swiper style={styles.wrapper} showsButtons={false}>
-
   <View style={styles.slide1}>
-
     <Image source={require('../assets/pages/background1.png')} style={styles.backgroundStyle}>
-
     {
                                                         //if font loaded, render header
       this.state.fontLoaded ? (
         <Text style={styles.headerStyle}>parties</Text>
       ) : null
     }
-
       <View style={styles.partyList} />
-
     </Image>
-
   </View>
-
   <View style={styles.slide2}>
-
     <Image source={require('../assets/pages/background2.png')} style={styles.backgroundStyle}>
-
     {
                                                        //if font loaded, render header
       this.state.fontLoaded ? (
         <Text style={styles.headerStyle}>messages</Text>
       ) : null
     }
-
       <View style={styles.partyList} />
-
     </Image>
-
   </View>
-
   <View style={styles.slide3}>
-
     <Image source={require('../assets/pages/background.png')} style={styles.backgroundStyle}>
-
     {
                                                         //if font loaded, render header
       this.state.fontLoaded ? (
         <Text style={styles.headerStyle}>create party</Text>
       ) : null
     }
-
     </Image>
-
   </View>
-
 </Swiper>
 );
 }
@@ -121,7 +102,7 @@ const styles = StyleSheet.create({
   },
   partyList: {
     backgroundColor: '#ffffff',
-    height: 483,
-    width: 313,
+    height: '100%',
+    width: '100%',
   },
 });

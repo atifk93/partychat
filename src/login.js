@@ -3,7 +3,6 @@ import Expo, { Font } from 'expo';
 import {
   StyleSheet,
   Alert,
-  Text,
   View,
   Image
 } from 'react-native';
@@ -24,8 +23,6 @@ export default class Login extends React.Component {
 
     this.setState({ fontLoaded: true });
   }
-
-
                                                          //facebook & firebase authentication
   async loginWithFacebook() {
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
@@ -46,7 +43,7 @@ export default class Login extends React.Component {
           `Hi ${(await response.json()).name}!`,
         );
       }
-    }
+}
 
 
   render() {

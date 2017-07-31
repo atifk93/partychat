@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
-import Login from './src/login.js';
-import Pages from './src/pages.js';
+import Login from './src/Login.js';
+import Pages from './src/Pages.js';
 
 export default class App extends React.Component {
 
@@ -24,7 +24,6 @@ componentWillMount() {
       if (user != null) {
         this.setState({ userAuthenticated: true });
       }
-
         // Do other things
     });
   }
