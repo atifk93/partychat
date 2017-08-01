@@ -26,7 +26,9 @@ export default class Pages extends React.Component {
 render() {
                                                         //render swiper
   return (
-<Swiper style={styles.wrapper} showsButtons={false}>
+<Swiper style={styles.wrapper} showsButtons={false} loop={false}
+        dot={<View style={styles.dot} />} activeDot={<View style={styles.activeDot} />}
+>
   <View style={styles.slide1}>
     <Image source={require('../assets/pages/background1.png')} style={styles.backgroundStyle}>
     {
@@ -49,16 +51,6 @@ render() {
       <View style={styles.partyList} />
     </Image>
   </View>
-  <View style={styles.slide3}>
-    <Image source={require('../assets/pages/background.png')} style={styles.backgroundStyle}>
-    {
-                                                        //if font loaded, render header
-      this.state.fontLoaded ? (
-        <Text style={styles.headerStyle}>create party</Text>
-      ) : null
-    }
-    </Image>
-  </View>
 </Swiper>
 );
 }
@@ -66,6 +58,26 @@ render() {
 
 
 const styles = StyleSheet.create({
+  dot: {
+    backgroundColor: 'rgba(0,0,0,.2)',
+    width: 9,
+    height: 9,
+    borderRadius: 5,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  activeDot: {
+    backgroundColor: '#007aff',
+    width: 9,
+    height: 9,
+    borderRadius: 5,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  },
   wrapper: {
   },
   slide1: {
@@ -75,12 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000'
   },
   slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000000'
-  },
-  slide3: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -101,8 +107,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   partyList: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff7f5ff',
     height: '100%',
-    width: '100%',
+    width: '98%',
   },
 });
