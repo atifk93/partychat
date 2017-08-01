@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ScrollView,
   StyleSheet,
   Image,
   Text,
@@ -31,24 +32,32 @@ render() {
 >
   <View style={styles.slide1}>
     <Image source={require('../assets/pages/background1.png')} style={styles.backgroundStyle}>
+      <View style={styles.headerStyle}>
     {
                                                         //if font loaded, render header
       this.state.fontLoaded ? (
-        <Text style={styles.headerStyle}>parties</Text>
+        <Text style={styles.headerText}>parties</Text>
       ) : null
     }
-      <View style={styles.partyList} />
+    </View>
+      <ScrollView style={styles.partyList}>
+      <Text>Hello</Text>
+      </ScrollView>
     </Image>
   </View>
   <View style={styles.slide2}>
     <Image source={require('../assets/pages/background2.png')} style={styles.backgroundStyle}>
-    {
-                                                       //if font loaded, render header
-      this.state.fontLoaded ? (
-        <Text style={styles.headerStyle}>messages</Text>
-      ) : null
-    }
-      <View style={styles.partyList} />
+    <View style={styles.headerStyle}>
+  {
+                                                      //if font loaded, render header
+    this.state.fontLoaded ? (
+      <Text style={styles.headerText}>messages</Text>
+    ) : null
+  }
+  </View>
+    <ScrollView style={styles.partyList}>
+    <Text>Hello</Text>
+    </ScrollView>
     </Image>
   </View>
 </Swiper>
@@ -78,8 +87,6 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginBottom: 3,
   },
-  wrapper: {
-  },
   slide1: {
     flex: 1,
     justifyContent: 'center',
@@ -99,16 +106,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerStyle: {
+    flex: 0.16,
+    backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'center',
+  },
+  headerText: {
     color: '#ffffff',
     backgroundColor: 'rgba(0,0,0,0)',
     fontSize: 35,
     fontFamily: 'arial-rounded-mt',
     fontWeight: 'normal',
-    padding: 20,
   },
   partyList: {
     backgroundColor: '#fff7f5ff',
-    height: '100%',
     width: '98%',
   },
 });
