@@ -4,16 +4,18 @@ import {
   StyleSheet,
   Alert,
   View,
-  Image
+  Image,
 } from 'react-native';
 import Button from 'react-native-button';
 import firebase from 'firebase';
+
 
 export default class Login extends React.Component {
 
   state = {
       fontLoaded: false,
-    };
+  };
+
 
   async componentDidMount() {
                                                            //wait for font to load
@@ -23,6 +25,7 @@ export default class Login extends React.Component {
 
     this.setState({ fontLoaded: true });
   }
+
                                                          //facebook & firebase authentication
   async loginWithFacebook() {
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
@@ -43,28 +46,28 @@ export default class Login extends React.Component {
           `Hi ${(await response.json()).name}!`,
         );
       }
-}
+  }
 
 
   render() {
                                                        //render login screen
     return (
       <View style={styles.container}>
-      <Image source={require('../assets/login/background.png')} style={styles.backgroundStyle}>
-        {
-                                                       //if font loaded, render button
-          this.state.fontLoaded ? (
-            <Button
-              containerStyle={styles.buttonStyle}
-              style={styles.buttonText}
-                                                     //facebook auth on button press
-              onPress={() => this.loginWithFacebook()}
-            >
-        login with facebook
-        </Button>
-      ) : null
-    }
-      </Image>
+        <Image source={require('../assets/login/background.png')} style={styles.backgroundStyle}>
+          {
+                                                         //if font loaded, render button
+           this.state.fontLoaded ? (
+              <Button
+                containerStyle={styles.buttonStyle}
+                style={styles.buttonText}
+                                                       //facebook auth on button press
+                onPress={() => this.loginWithFacebook()}
+              >
+                login with facebook
+              </Button>
+            ) : null
+          }
+        </Image>
       </View>
     );
   }
@@ -75,7 +78,6 @@ const styles = StyleSheet.create({
   backgroundStyle: {
     flex: 1,
     width: '100%',
-    height: '100%',
     alignItems: 'center',
   },
   container: {
