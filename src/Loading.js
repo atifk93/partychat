@@ -8,11 +8,15 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 
 export default class Loading extends React.Component {
+
   render() {
     return (
       <View style={styles.container}>
         <Image source={require('../assets/loading/background.png')} style={styles.backgroundStyle}>
-          <Spinner visible />
+          <Spinner
+            visible
+            overlayColor={'rgba(0,0,0,0)'}
+          />
         </Image>
       </View>
     );

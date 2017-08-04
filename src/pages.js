@@ -7,9 +7,9 @@ import {
   View
 } from 'react-native';
 import Swiper from 'react-native-swiper';
-import Button from 'react-native-button';
-import firebase from 'firebase';
+import Drawer from 'react-native-drawer';
 import { Font } from 'expo';
+import Settings from './Settings.js';
 
 
 export default class Pages extends React.Component {
@@ -23,7 +23,6 @@ export default class Pages extends React.Component {
                                                        //wait for font to load
     await Font.loadAsync({
       'arial-rounded-mt': require('../assets/fonts/arial-rounded-mt.ttf'),
-      'arial-rounded': require('../assets/fonts/arial-rounded.ttf'),
     });
 
     this.setState({ fontLoaded: true });
@@ -33,68 +32,70 @@ export default class Pages extends React.Component {
   render() {
                                                           //render swiper
     return (
-      <Swiper
-        showsButtons={false} loop={false}
-        dot={<View style={styles.dot} />} activeDot={<View style={styles.activeDot} />}
+      <Drawer
+        styles={drawerStyles}
+        type="overlay"
+        tapToClose
+        openDrawerOffset={0.60}
+        closedDrawerOffset={-5}
+        tweenHandler={(ratio) => ({ main: { opacity: (2 - ratio) / 2 } })}
+        content={<Settings />}
       >
-        <View style={styles.slide1}>
-          <Image source={require('../assets/pages/background1.png')} style={styles.backgroundStyle}>
-            <View style={styles.headerStyle}>
-              {
-                                                                  //if font loaded, render header
-                this.state.fontLoaded ? (
-                  <Text style={styles.headerText}>parties</Text>
-                ) : null
-              }
-            </View>
-            <ScrollView style={styles.scrollView}>
-              {
-                                                             //if font loaded, render button
-               this.state.fontLoaded ? (
-                  <Button
-                    containerStyle={styles.buttonStyle}
-                    style={styles.buttonText}
-                                                           //facebook auth on button press
-                    onPress={() => firebase.auth().signOut()}
-                  >
-                    log out
-                  </Button>
-                ) : null
-              }
-            </ScrollView>
-          </Image>
-        </View>
-        <View style={styles.slide2}>
-          <Image source={require('../assets/pages/background2.png')} style={styles.backgroundStyle}>
-          <View style={styles.headerStyle}>
-            {
-                                                                //if font loaded, render header
-              this.state.fontLoaded ? (
-                <Text style={styles.headerText}>messages</Text>
-              ) : null
-            }
+        <Swiper
+          showsButtons={false} loop={false}
+          dot={<View style={styles.dot} />}
+          activeDot={<View style={styles.activeDot} />}
+        >
+          <View style={styles.slide1}>
+            <Image
+              source={require('../assets/pages/background1.png')}
+              style={styles.backgroundStyle}
+            >
+                <View style={styles.headerStyle}>
+                  {
+                                                                    //if font loaded, render header
+                    this.state.fontLoaded ? (
+                      <Text style={styles.headerText}>parties</Text>
+                    ) : null
+                  }
+                </View>
+                <ScrollView style={styles.scrollView} />
+            </Image>
           </View>
-          <ScrollView style={styles.scrollView}>
-            {
-                                                           //if font loaded, render button
-             this.state.fontLoaded ? (
-                <Button
-                  containerStyle={styles.buttonStyle}
-                  style={styles.buttonText}
-                                                         //facebook auth on button press
-                  onPress={() => firebase.auth().signOut()}
-                >
-                  log out
-                </Button>
-              ) : null
-            }
-          </ScrollView>
-          </Image>
-        </View>
-      </Swiper>
+          <View style={styles.slide2}>
+            <Image
+              source={require('../assets/pages/background2.png')}
+              style={styles.backgroundStyle}
+            >
+              <View style={styles.headerStyle}>
+                {
+                                                                    //if font loaded, render header
+                  this.state.fontLoaded ? (
+                    <Text style={styles.headerText}>messages</Text>
+                  ) : null
+                }
+              </View>
+              <ScrollView style={styles.scrollView} />
+            </Image>
+          </View>
+        </Swiper>
+      </Drawer>
     );
   }
 }
+
+
+const drawerStyles = {
+  drawer: {
+    backgroundColor: '#fff7f5ff',
+    shadowColor: '#000000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+  },
+  main: {
+    paddingLeft: 5,
+  },
+};
 
 
 const styles = StyleSheet.create({
@@ -154,20 +155,4 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  buttonStyle: {
-    backgroundColor: '#ff2429ff',
-    height: 40,
-    width: 90,
-    margin: 5,
-    borderRadius: 50,
-    overflow: 'hidden',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontFamily: 'arial-rounded',
-    fontWeight: 'normal',
-    fontSize: 17,
-  }
 });
