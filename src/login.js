@@ -17,8 +17,8 @@ export default class Login extends React.Component {
   };
 
 
-  async componentDidMount() {
-                                                           //wait for font to load
+  async componentWillMount() {
+    //wait for font to load
     await Font.loadAsync({
       'arial-rounded': require('../assets/fonts/arial-rounded.ttf'),
     });
@@ -26,41 +26,41 @@ export default class Login extends React.Component {
     this.setState({ fontLoaded: true });
   }
 
-                                                         //facebook & firebase authentication
+  //facebook & firebase authentication
   async loginWithFacebook() {
-      const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
-          permissions: ['public_profile', 'user_friends'],
-        });
-      if (type === 'success') {
-                                            // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-          `https://graph.facebook.com/me?access_token=${token}`);
-                                        // Build Firebase credential with the Facebook access token.
-        const credential = firebase.auth.FacebookAuthProvider.credential(token);
-                                           // Sign in with credential from the Facebook user.
-        firebase.auth().signInWithCredential(credential).catch((error) => {
-                                                         // Handle Errors here.
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('283785705427946', {
+      permissions: ['public_profile', 'user_friends'],
+    });
+    if (type === 'success') {
+      // Get the user's name using Facebook's Graph API
+      const response = await fetch(
+        `https://graph.facebook.com/me?access_token=${token}`);
+      // Build Firebase credential with the Facebook access token.
+      const credential = firebase.auth.FacebookAuthProvider.credential(token);
+      // Sign in with credential from the Facebook user.
+      firebase.auth().signInWithCredential(credential).catch((error) => {
+      // Handle Errors here.
       });
-        Alert.alert(
-          'Logged in!',
-          `Hi ${(await response.json()).name}!`,
-        );
-      }
+      Alert.alert(
+        'Logged in!',
+        `Hi ${(await response.json()).name}!`,
+      );
+    }
   }
 
 
   render() {
-                                                       //render login screen
+    //render login screen
     return (
       <View style={styles.container}>
         <Image source={require('../assets/login/background.png')} style={styles.backgroundStyle}>
           {
-                                                         //if font loaded, render button
-           this.state.fontLoaded ? (
+            //if font loaded, render button
+            this.state.fontLoaded ? (
               <Button
                 containerStyle={styles.buttonStyle}
                 style={styles.buttonText}
-                                                       //facebook auth on button press
+                //facebook auth on button press
                 onPress={() => this.loginWithFacebook()}
               >
                 login with facebook

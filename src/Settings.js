@@ -15,8 +15,8 @@ export default class Settings extends React.Component {
   };
 
 
-  async componentDidMount() {
-                                                       //wait for font to load
+  async componentWillMount() {
+    //wait for font to load
     await Font.loadAsync({
       'arial-rounded': require('../assets/fonts/arial-rounded.ttf'),
     });
@@ -27,20 +27,23 @@ export default class Settings extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        scrollEnabled={false}
+      >
       {
-                                                     //if font loaded, render button
-       this.state.fontLoaded ? (
-          <Button
-            containerStyle={styles.buttonStyle}
-            style={styles.buttonText}
-                                                   //facebook auth on button press
-            onPress={() => firebase.auth().signOut()}
-          >
-            log out
-          </Button>
-        ) : null
-      }
+         //if font loaded, render button
+         this.state.fontLoaded ? (
+            <Button
+              containerStyle={styles.buttonStyle}
+              style={styles.buttonText}
+              //sign out firebase on button press
+              onPress={() => firebase.auth().signOut()}
+            >
+              log out
+            </Button>
+          ) : null
+        }
       </ScrollView>
     );
   }
@@ -53,13 +56,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   buttonStyle: {
     backgroundColor: '#ff2429ff',
     height: 40,
     width: 90,
-    margin: 5,
+    margin: 15,
     borderRadius: 50,
     overflow: 'hidden',
     justifyContent: 'center',

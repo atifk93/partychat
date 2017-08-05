@@ -19,8 +19,8 @@ export default class Pages extends React.Component {
   };
 
 
-  async componentDidMount() {
-                                                       //wait for font to load
+  async componentWillMount() {
+    //wait for font to load
     await Font.loadAsync({
       'arial-rounded-mt': require('../assets/fonts/arial-rounded-mt.ttf'),
     });
@@ -30,15 +30,16 @@ export default class Pages extends React.Component {
 
 
   render() {
-                                                          //render swiper
+    //render swiper
     return (
       <Drawer
         styles={drawerStyles}
-        type="overlay"
+        type="displace"
         tapToClose
+        panOpenMask={0.07}
         openDrawerOffset={0.60}
-        closedDrawerOffset={-5}
-        tweenHandler={(ratio) => ({ main: { opacity: (2 - ratio) / 2 } })}
+        closedDrawerOffset={-10}
+        tweenHandler={Drawer.tweenPresets.parallax}
         content={<Settings />}
       >
         <Swiper
@@ -53,7 +54,7 @@ export default class Pages extends React.Component {
             >
                 <View style={styles.headerStyle}>
                   {
-                                                                    //if font loaded, render header
+                    //if font loaded, render header
                     this.state.fontLoaded ? (
                       <Text style={styles.headerText}>parties</Text>
                     ) : null
@@ -69,7 +70,7 @@ export default class Pages extends React.Component {
             >
               <View style={styles.headerStyle}>
                 {
-                                                                    //if font loaded, render header
+                  //if font loaded, render header
                   this.state.fontLoaded ? (
                     <Text style={styles.headerText}>messages</Text>
                   ) : null
@@ -87,13 +88,13 @@ export default class Pages extends React.Component {
 
 const drawerStyles = {
   drawer: {
-    backgroundColor: '#fff7f5ff',
+    backgroundColor: '#fff3f1ff',
     shadowColor: '#000000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
   main: {
-    paddingLeft: 5,
+    paddingLeft: 10,
   },
 };
 
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerStyle: {
-    flex: 0.16,
+    flex: 0.17,
     backgroundColor: 'rgba(0,0,0,0)',
     justifyContent: 'center',
     alignItems: 'center',
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
   },
   scrollView: {
-    backgroundColor: '#fff7f5ff',
+    backgroundColor: '#fff3f1ff',
     width: '100%',
     alignItems: 'center',
   },
