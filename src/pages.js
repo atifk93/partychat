@@ -135,11 +135,11 @@ const styles = StyleSheet.create({
   backgroundStyle: {
     flex: 1,
     width: '100%',
-    height: '100%',
     alignItems: 'center',
   },
   headerStyle: {
-    flex: 0.17,
+    height: 80,
+    width: '100%',
     backgroundColor: 'rgba(0,0,0,0)',
     justifyContent: 'center',
     alignItems: 'center',
