@@ -36,7 +36,7 @@ export default class Pages extends React.Component {
         styles={drawerStyles}
         type="displace"
         tapToClose
-        panOpenMask={0.07}
+        panOpenMask={0.06}
         openDrawerOffset={0.60}
         closedDrawerOffset={-10}
         tweenHandler={Drawer.tweenPresets.parallax}
@@ -90,8 +90,8 @@ const drawerStyles = {
   drawer: {
     backgroundColor: '#fff3f1ff',
     shadowColor: '#000000',
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
   },
   main: {
     paddingLeft: 10,
