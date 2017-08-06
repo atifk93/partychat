@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ScrollView,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import Button from 'react-native-button';
 import { Font } from 'expo';
@@ -38,7 +39,13 @@ export default class Settings extends React.Component {
               containerStyle={styles.buttonStyle}
               style={styles.buttonText}
               //sign out firebase on button press
-              onPress={() => firebase.auth().signOut()}
+              onPress={() => Alert.alert(
+                'Are you sure?',
+                null,
+                [{ text: 'cancel', style: 'cancel' },
+                { text: 'log out', onPress: () => firebase.auth().signOut() }],
+                { cancelable: false }
+              )}
             >
               log out
             </Button>

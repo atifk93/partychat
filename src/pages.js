@@ -90,7 +90,7 @@ const drawerStyles = {
   drawer: {
     backgroundColor: '#fff3f1ff',
     shadowColor: '#000000',
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.3,
     shadowRadius: 3,
   },
   main: {

@@ -42,8 +42,8 @@ export default class Login extends React.Component {
       // Handle Errors here.
       });
       Alert.alert(
-        'Logged in!',
-        `Hi ${(await response.json()).name}!`,
+        'Let\'s party!',
+        `logged in as ${(await response.json()).name}`,
       );
     }
   }
