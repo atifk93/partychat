@@ -25,7 +25,6 @@ export default class Settings extends React.Component {
     //wait for font to load
     await Font.loadAsync({
       'arial-rounded': require('../assets/fonts/arial-rounded.ttf'),
-      'arial-rounded-mt': require('../assets/fonts/arial-rounded-mt.ttf'),
     });
 
     this.setState({ fontLoaded: true });
@@ -121,13 +120,13 @@ const styles = StyleSheet.create({
     width: 125,
     borderRadius: 60,
     marginTop: '15%',
-    marginBottom: '8%',
+    marginBottom: '13%',
   },
   nameText: {
     color: '#4b4b4bff',
     backgroundColor: 'rgba(0,0,0,0)',
-    fontSize: 22,
-    fontFamily: 'arial-rounded-mt',
+    fontSize: 25,
+    fontFamily: 'arial-rounded',
     fontWeight: 'normal',
   },
   profileContainer: {
