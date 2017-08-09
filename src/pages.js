@@ -36,10 +36,9 @@ export default class Pages extends React.Component {
         styles={drawerStyles}
         type="displace"
         tapToClose
-        panOpenMask={0.06}
-        openDrawerOffset={0.60}
-        closedDrawerOffset={-10}
-        tweenHandler={Drawer.tweenPresets.parallax}
+        panOpenMask={0.05}
+        openDrawerOffset={0.51}
+        closedDrawerOffset={-8}
         content={<Settings />}
       >
         <Swiper
@@ -94,7 +93,7 @@ const drawerStyles = {
     shadowRadius: 2,
   },
   main: {
-    paddingLeft: 10,
+    paddingLeft: 8,
   },
 };
 

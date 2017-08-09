@@ -5,6 +5,7 @@ import {
   Alert,
   View,
   Image,
+  AsyncStorage,
 } from 'react-native';
 import Button from 'react-native-button';
 import firebase from 'firebase';
@@ -32,6 +33,7 @@ export default class Login extends React.Component {
       permissions: ['public_profile', 'user_friends'],
     });
     if (type === 'success') {
+      await AsyncStorage.setItem('fbtoken', token);
       // Get the user's name using Facebook's Graph API
       const response = await fetch(
         `https://graph.facebook.com/me?access_token=${token}`);
