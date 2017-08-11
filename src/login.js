@@ -6,6 +6,7 @@ import {
   View,
   Image,
   AsyncStorage,
+  Platform,
 } from 'react-native';
 import Button from 'react-native-button';
 import firebase from 'firebase';
@@ -45,7 +46,7 @@ export default class Login extends React.Component {
       });
       Alert.alert(
         'Let\'s party!',
-        `logged in as ${(await response.json()).name}`,
+        `Logged in as ${(await response.json()).name}`,
       );
     }
   }
@@ -96,12 +97,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '125%',
+    marginTop: (Platform.OS === 'android') ? '117%' : '125%',
   },
   buttonText: {
     color: '#ffffff',
     fontFamily: 'arial-rounded',
     fontWeight: 'normal',
     fontSize: 17,
+    paddingBottom: (Platform.OS === 'android') ? 4 : 0,
   }
 });

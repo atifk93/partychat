@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  Platform,
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Drawer from 'react-native-drawer';
@@ -51,15 +52,15 @@ export default class Pages extends React.Component {
               source={require('../assets/pages/background1.png')}
               style={styles.backgroundStyle}
             >
-                <View style={styles.headerStyle}>
-                  {
-                    //if font loaded, render header
-                    this.state.fontLoaded ? (
-                      <Text style={styles.headerText}>parties</Text>
-                    ) : null
-                  }
-                </View>
-                <ScrollView style={styles.scrollView} />
+              <View style={styles.headerStyle}>
+                {
+                  //if font loaded, render header
+                  this.state.fontLoaded ? (
+                    <Text style={styles.headerText}>parties</Text>
+                  ) : null
+                }
+              </View>
+              <ScrollView style={styles.scrollView} />
             </Image>
           </View>
           <View style={styles.slide2}>
@@ -91,6 +92,7 @@ const drawerStyles = {
     shadowColor: '#000000',
     shadowOpacity: 0.3,
     shadowRadius: 2,
+    elevation: 3,
   },
   main: {
     paddingLeft: 8,
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   activeDot: {
-    backgroundColor: '#007aff',
+    backgroundColor: '#00a9faff',
     width: 9,
     height: 9,
     borderRadius: 5,
@@ -137,16 +139,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerStyle: {
-    height: 85,
+    height: (Platform.OS === 'android') ? 85 : 80,
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0)',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 7,
+    marginTop: (Platform.OS === 'android') ? 18 : 8,
   },
   headerText: {
     color: '#ffffff',
     backgroundColor: 'rgba(0,0,0,0)',
-    fontSize: 35,
+    fontSize: 38,
     fontFamily: 'arial-rounded-mt',
     fontWeight: 'normal',
   },

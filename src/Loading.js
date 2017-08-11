@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Image,
+  Platform,
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -48,10 +49,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerStyle: {
-    flex: 0.17,
+    height: (Platform.OS === 'android') ? 85 : 80,
+    width: '100%',
     backgroundColor: 'rgba(0,0,0,0)',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 7,
+    marginTop: (Platform.OS === 'android') ? 18 : 8,
   },
   scrollView: {
     backgroundColor: '#fff3f1ff',

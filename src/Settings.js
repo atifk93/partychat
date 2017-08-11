@@ -6,6 +6,7 @@ import {
   AsyncStorage,
   Image,
   Text,
+  Platform,
 } from 'react-native';
 import Button from 'react-native-button';
 import { Font } from 'expo';
@@ -76,8 +77,8 @@ export default class Settings extends React.Component {
               onPress={() => Alert.alert(
                 'Are you sure?',
                 null,
-                [{ text: 'cancel', style: 'cancel' },
-                { text: 'log out', onPress: () => firebase.auth().signOut() }],
+                [{ text: 'Cancel', style: 'cancel' },
+                { text: 'Log out', onPress: () => firebase.auth().signOut() }],
                 { cancelable: false }
               )}
             >
@@ -100,10 +101,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   buttonStyle: {
-    backgroundColor: '#ff2429ff',
+    backgroundColor: '#fe5c61ff',
     height: 40,
     width: 90,
-    marginBottom: '10%',
+    marginBottom: '10.5%',
     borderRadius: 50,
     overflow: 'hidden',
     justifyContent: 'center',
@@ -114,13 +115,14 @@ const styles = StyleSheet.create({
     fontFamily: 'arial-rounded',
     fontWeight: 'normal',
     fontSize: 17,
+    paddingBottom: (Platform.OS === 'android') ? 4 : 0,
   },
   profilePic: {
-    height: 125,
-    width: 125,
-    borderRadius: 60,
-    marginTop: '15%',
-    marginBottom: '13%',
+    height: 140,
+    width: 140,
+    borderRadius: 70,
+    marginTop: (Platform.OS === 'android') ? 40 : 30,
+    marginBottom: 20,
   },
   nameText: {
     color: '#4b4b4bff',
@@ -128,9 +130,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'arial-rounded',
     fontWeight: 'normal',
+    textAlign: 'center',
+    includeFontPadding: false,
   },
   profileContainer: {
     backgroundColor: 'rgba(0,0,0,0)',
     alignItems: 'center',
+    width: '100%',
   },
 });
